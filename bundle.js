@@ -15,7 +15,7 @@ window.addEventListener('load', function() {
 
     var request = new XMLHttpRequest()
 
-    request.open('GET','https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=0x045129cba354a107eceb686300dabe2bdee6e453&apikey=W1ICGCDZ4TQBKRM5QKBRSCR3WXG4NZIASK', true)
+    request.open('GET','https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=0x7090a6e22c838469c9e67851d6489ba9c933a43f&apikey=W1ICGCDZ4TQBKRM5QKBRSCR3WXG4NZIASK', true)
 
     request.onload = function () {
       // json parsing
@@ -27,7 +27,7 @@ window.addEventListener('load', function() {
 window.onload = function(){
 
 
-  var totalUrl = "https://api.etherscan.io/api?module=proxy&action=eth_call&to=0x045129cba354a107eceb686300dabe2bdee6e453&data=0x18160ddd&tag=latest&apikey=W1ICGCDZ4TQBKRM5QKBRSCR3WXG4NZIASK";
+  var totalUrl = "https://api.etherscan.io/api?module=proxy&action=eth_call&to=0x7090a6e22c838469c9e67851d6489ba9c933a43f&data=0x18160ddd&tag=latest&apikey=W1ICGCDZ4TQBKRM5QKBRSCR3WXG4NZIASK";
   $.ajax(totalUrl, {
       cache: false,
       dataType: "json"
@@ -35,7 +35,7 @@ window.onload = function(){
     document.getElementById("total").innerHTML = numberWithCommas(parseInt(data.result, 16))
   });
 
-  var circulatingUrl = "https://api.etherscan.io/api?module=proxy&action=eth_call&to=0x045129cba354a107eceb686300dabe2bdee6e453&data=0x9358928b&tag=latest&apikey=W1ICGCDZ4TQBKRM5QKBRSCR3WXG4NZIASK";
+  var circulatingUrl = "https://api.etherscan.io/api?module=proxy&action=eth_call&to=0x7090a6e22c838469c9e67851d6489ba9c933a43f&data=0x9358928b&tag=latest&apikey=W1ICGCDZ4TQBKRM5QKBRSCR3WXG4NZIASK";
   $.ajax(circulatingUrl, {
       cache: false,
       dataType: "json"
@@ -43,7 +43,7 @@ window.onload = function(){
     document.getElementById("circulating").innerHTML = numberWithCommas(parseInt(data.result, 16))
   });
 
-  var giveawayUrl = "https://api.etherscan.io/api?module=proxy&action=eth_call&to=0x045129cba354a107eceb686300dabe2bdee6e453&data=0xf1610120&tag=latest&apikey=W1ICGCDZ4TQBKRM5QKBRSCR3WXG4NZIASK";
+  var giveawayUrl = "https://api.etherscan.io/api?module=proxy&action=eth_call&to=0x7090a6e22c838469c9e67851d6489ba9c933a43f&data=0xf1610120&tag=latest&apikey=W1ICGCDZ4TQBKRM5QKBRSCR3WXG4NZIASK";
   $.ajax(giveawayUrl, {
       cache: false,
       dataType: "json"
@@ -61,36 +61,6 @@ function numberWithCommas(x) {
 }
 
 
-function startApp(){
-  addr = web3.eth.accounts[0]
-
-
-
-  // Now to write a tx to the blockchain:
-  token.getFromFaucet(function (err, hash) {
-    if (err){
-      is_rit_field.innerHTML = "Problem sending tokens."
-      return console.error('Problem sending tokens', err)
-    }
-    console.log('tokens transferred in tx with hash', hash)
-    is_rit_field.innerHTML = '<a color="#fff" href="https://etherscan.io/tx/' + hash + '">Doubloons sent, click here to see transaction!</a>'
-
-    // Now we poll for tx inclusion:
-    var interval = setInterval(function() {
-      web3.eth.getTransactionReceipt(hash, function (err, receipt) {
-        if (err) return console.error('error getting receipt', err)
-
-        console.log('tx receipt is:')
-        console.dir(receipt)
-
-        //getBalance(addr)
-        //getBalance(toAddress)
-        clearInterval(interval)
-      })
-    }, 1000)
-
-  })
-}
 
 function getBalance(addr) {
   console.log('getting balance for ' + addr)

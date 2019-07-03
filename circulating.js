@@ -4,6 +4,6 @@ window.onload = function(){
       cache: false,
       dataType: "json"
   }).then(function (data){
-    document.getElementById("circulating").innerHTML = numberWithCommas(1500000 - parseInt(data.result));
+    document.getElementById("circulating").innerHTML = 1500000 - parseInt(data.result);
   });
 }
